@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>446</width>
-    <height>169</height>
+    <width>616</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,10 +45,10 @@ QPushButton:clicked {
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>19</x>
-      <y>19</y>
-      <width>411</width>
-      <height>131</height>
+      <x>9</x>
+      <y>430</y>
+      <width>601</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -57,54 +57,44 @@ QPushButton:clicked {
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>181</width>
-       <height>101</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Пользователи</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../src/user.png</normaloff>../src/user.png</iconset>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>30</width>
-       <height>30</height>
-      </size>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>10</y>
-       <width>181</width>
-       <height>101</height>
+       <x>270</x>
+       <y>0</y>
+       <width>51</width>
+       <height>61</height>
       </rect>
      </property>
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-      </font>
-     </property>
      <property name="text">
-      <string>Тесты</string>
+      <string/>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../src/test.png</normaloff>../src/test.png</iconset>
+       <normaloff>../src/create.png</normaloff>../src/create.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>38</width>
+       <height>38</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>0</y>
+       <width>51</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../src/ok.png</normaloff>../src/ok.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -113,6 +103,49 @@ QPushButton:clicked {
       </size>
      </property>
     </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>0</y>
+       <width>51</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../src/reload.png</normaloff>../src/reload.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>38</width>
+       <height>38</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>621</width>
+      <height>421</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Id</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Username</string>
+     </property>
+    </column>
    </widget>
   </widget>
  </widget>
