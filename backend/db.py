@@ -1,7 +1,7 @@
 import sqlite3
 
 
-def create_user(username, password, admin=False):
+def create_user(username: str, password: str, admin=False):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     if not len(c.execute(f"SELECT username FROM Users WHERE username = '{username}'").fetchall()):
@@ -11,7 +11,7 @@ def create_user(username, password, admin=False):
     raise Exception
 
 
-def auth(username, password):
+def auth(username: str, password: str):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     ans = c.execute(f"SELECT password, admin FROM Users WHERE username = '{username}'").fetchall()[0]
@@ -31,7 +31,7 @@ def get_tests():
 def get_test(test_id: int):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    ans = c.execute(f"SELECT id, imgUrl FROM Vopros WHERE id = '{test_id}'").fetchall()
+    ans = c.execute(f"SELECT imgUrl FROM Vopros WHERE id_test = '{test_id}'").fetchall()
     con.close()
     return ans
 
@@ -42,7 +42,10 @@ def create_test(name: str, lst: list):
     if not len(c.execute(f"SELECT Name FROM Tests WHERE Name = '{name}'").fetchall()):
         c.execute(f"INSERT INTO Tests(Name) VALUES('{name}')")
         con.commit()
-        test_id = c.execute("SELECT id FROM Tests WHERE Name = '{name}'").fetchall()[0]
+        con.close()
+        con = sqlite3.connect("database.db")
+        c = con.cursor()
+        test_id = c.execute(f"SELECT id FROM Tests WHERE Name = '{name}'").fetchall()[0][0]
         for item in lst:
             c.execute(f"INSERT INTO Vopros(id_test, imgUrl) VALUES('{test_id}', '{item}')")
         con.commit()
@@ -51,4 +54,10 @@ def create_test(name: str, lst: list):
     return "error"
 
 
-print(create_test("TestName2", ["1.png", "2.png"]))
+def create_rez(id_test: str, id_user: str, rez: list):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    c.execute(f"INSERT INTO Results(id_test, id_user, rez) VALUES('{id_test}', '{id_user}', '{rez}')")
+
+
+create_rez("1", "1", [1, 2])

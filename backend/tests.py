@@ -18,7 +18,7 @@ async def get_tests():
         return {"msg": "error"}
 
 
-@tests.get("/test")
+@tests.post("/test")
 async def get_test(inp: Test):
     try:
         return {"msg": db.get_test(inp.test_id)}
