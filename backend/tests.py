@@ -21,6 +21,7 @@ async def get_tests():
 @tests.post("/test")
 async def get_test(inp: Test):
     try:
-        return {"msg": db.get_test(inp.test_id)}
+        ans = db.get_test(inp.test_id)
+        return {"msg": ans[0], "otv": ans[1]}
     except Exception:
         return {"msg": "error"}

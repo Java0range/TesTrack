@@ -25,7 +25,7 @@ def auth(username: str, password: str):
 def get_tests():
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    ans = c.execute("SELECT * FROM Tests").fetchall()
+    ans = c.execute("SELECT id, Name FROM Tests").fetchall()
     con.close()
     return ans
 
@@ -34,15 +34,16 @@ def get_test(test_id: int):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     ans = c.execute(f"SELECT imgUrl FROM Vopros WHERE id_test = '{test_id}'").fetchall()
+    lst_otv = c.execute(f"SELECT otv FROM Tests WHERE id = '{test_id}'").fetchall()[0][0]
     con.close()
-    return ans
+    return (ans, lst_otv)
 
 
-def create_test(name: str, lst: list):
+def create_test(name: str, lst: list, otv: list):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     if not len(c.execute(f"SELECT Name FROM Tests WHERE Name = '{name}'").fetchall()):
-        c.execute(f"INSERT INTO Tests(Name) VALUES('{name}')")
+        c.execute(f"INSERT INTO Tests(Name, otv) VALUES('{name}', '{'%%%'.join(otv)}')")
         con.commit()
         con.close()
         con = sqlite3.connect("database.db")
