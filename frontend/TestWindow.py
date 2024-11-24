@@ -134,7 +134,3 @@ class Ui_TestWindow(object):
         painter.drawPixmap(x_pos, y_pos, overlay)
         painter.end()
         return result
-
-    def closeEvent(self, event):
-        self.closed.emit()
-        event.accept()

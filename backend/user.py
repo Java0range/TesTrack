@@ -21,7 +21,7 @@ user = APIRouter(prefix="/users", tags=["users"])
 async def auth_user(inp: User):
     ans = db.auth(inp.username, inp.password)
     if ans != "false":
-        return {"msg": "true", "admin": ans}
+        return {"msg": "true", "admin": ans[0], "id": ans[1]}
     else:
         return {"msg": "false"}
 

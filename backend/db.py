@@ -14,11 +14,11 @@ def create_user(username: str, password: str, admin=False):
 def auth(username: str, password: str):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    ans = c.execute(f"SELECT password, admin FROM Users WHERE username = '{username}'").fetchall()
+    ans = c.execute(f"SELECT password, admin, id FROM Users WHERE username = '{username}'").fetchall()
     if not len(ans):
         return "false"
     if password == ans[0][0]:
-        return ans[0][1]
+        return (ans[0][1], ans[0][2])
     return "false"
 
 
@@ -57,9 +57,9 @@ def create_test(name: str, lst: list, otv: list):
     return "error"
 
 
-def create_rez(id_test: str, id_user: str, rez: list):
+def create_rez(id_test: int, id_user: int, rez: list):
     con = sqlite3.connect("database.db")
     c = con.cursor()
-    c.execute(f"INSERT INTO Results(id_test, id_user, rez) VALUES('{id_test}', '{id_user}', '{rez}')")
+    c.execute(f"INSERT INTO Results(id_test, id_user, rez) VALUES('{id_test}', '{id_user}', '{'%%%'.join(rez)}')")
     con.commit()
     con.close()
