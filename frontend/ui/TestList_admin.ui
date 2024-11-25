@@ -53,17 +53,7 @@ QPushButton:clicked {
     </property>
     <column>
      <property name="text">
-      <string>Id</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Test Name</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>Username</string>
+      <string>User id</string>
      </property>
     </column>
     <column>

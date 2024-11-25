@@ -7,6 +7,7 @@ from TestWindow import Ui_TestWindow
 from RezWindow import Ui_Rez_Window
 from AuthAdmin import Ui_AuthWindow
 from AdminPanel import Ui_AdminPanel
+from AdminTestList import Ui_AdminTestList
 from AdminCreateTest1 import Ui_create_test_1
 from AdminCreateTest2 import Ui_create_test_2
 from AdminTestsList import Ui_AdminTestsList
@@ -47,6 +48,7 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.pushButton.clicked.connect(self.auth)
         self.actionAdmin_Panel.triggered.connect(lambda: self.action_clicked(self.actionAdmin_Panel.text()))
         self.actionServer_Settings.triggered.connect(lambda: self.action_clicked(self.actionServer_Settings.text()))
@@ -80,6 +82,7 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
     def action_clicked(self, event):
@@ -94,6 +97,7 @@ class TestList(QDialog, Ui_TestList):
         super().__init__()
         self.main = main
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_2.clicked.connect(self.test_clicked)
@@ -110,6 +114,7 @@ class TestList(QDialog, Ui_TestList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
     def test_clicked(self):
@@ -143,6 +148,7 @@ class TestList(QDialog, Ui_TestList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
     def save_img(self, imgurl):
@@ -165,6 +171,7 @@ class TestWindow(QDialog, Ui_TestWindow):
     def __init__(self, imgurl):
         super().__init__()
         self.setupUi(self, imgurl)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.save_Button.clicked.connect(self.close)
 
     def closeEvent(self, event):
@@ -177,6 +184,7 @@ class RezWindow(QDialog, Ui_Rez_Window):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.tableWidget.setColumnWidth(1, 275)
         self.tableWidget.setColumnWidth(2, 275)
 
@@ -207,6 +215,7 @@ class AuthAdmin(QDialog, Ui_AuthWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.login_button.clicked.connect(self.auth)
 
     def auth(self):
@@ -230,12 +239,14 @@ class AuthAdmin(QDialog, Ui_AuthWindow):
                     msg_box.setIcon(QMessageBox.Icon.Critical)
                     msg_box.setText("Ошибка")
                     msg_box.setWindowTitle("Ошибка")
+                    msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
                     msg_box.exec()
         except Exception:
             msg_box = QMessageBox()
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
 
@@ -243,6 +254,7 @@ class AdminPanel(QDialog, Ui_AdminPanel):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.pushButton_2.clicked.connect(self.tests_button)
 
     def tests_button(self):
@@ -255,11 +267,13 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_4.clicked.connect(self.reload)
         self.pushButton_2.clicked.connect(self.create_test)
         self.pushButton_5.clicked.connect(self.delete_test)
+        self.pushButton_3.clicked.connect(self.open_test)
         try:
             link = f"{user.link}/tests/tests/"
             responce = requests.get(link).json()["msg"]
@@ -273,6 +287,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
     def reload(self):
@@ -290,6 +305,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
 
     def create_test(self):
@@ -310,13 +326,36 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
+
+    def open_test(self):
+        try:
+            row = self.tableWidget.currentRow()
+            test_id = int(self.tableWidget.item(row, 0).text())
+            link = f"{user.link}/tests/reztest/"
+            data = {
+                "test_id": test_id
+            }
+            ans = requests.post(link, json=data).json()["msg"]
+            if ans != "error":
+                self.admin_test_list = AdminTestList(ans)
+                self.admin_test_list.show()
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
 
 
 class CreateTest1(QDialog, Ui_create_test_1):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.pushButton.clicked.connect(self.next)
 
     def next(self):
@@ -331,6 +370,7 @@ class CreateTest2(QDialog, Ui_create_test_2):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.tableWidget.setColumnWidth(0, 180)
         self.tableWidget.setColumnWidth(1, 180)
         self.pushButton.clicked.connect(self.create_test)
@@ -376,7 +416,22 @@ class CreateTest2(QDialog, Ui_create_test_2):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
             msg_box.exec()
+
+
+class AdminTestList(QDialog, Ui_AdminTestList):
+    def __init__(self, lst: list):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.tableWidget.setColumnWidth(0, 100)
+        self.tableWidget.setColumnWidth(1, 500)
+        for i in lst:
+            numRows = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(numRows)
+            self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+            self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(" ".join(i[1].split("%%%"))))
         
 
 if __name__ == '__main__':
