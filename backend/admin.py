@@ -13,6 +13,10 @@ class DeleteTest(BaseModel):
     test_id: int
 
 
+class DeleteUser(BaseModel):
+    user_id: int
+
+
 admin = APIRouter(prefix="/admin", tags=["admin"])
 
 
@@ -30,6 +34,15 @@ async def create_test(inp: CreateTest):
 async def delete_test(inp: DeleteTest):
     try:
         db.delete_test(inp.test_id)
+        return {"msg": "true"}
+    except Exception:
+        return {"msg": "error"}
+
+
+@admin.delete("/deleteuser/")
+async def delete_user(inp: DeleteUser):
+    try:
+        db.delete_user(inp.user_id)
         return {"msg": "true"}
     except Exception:
         return {"msg": "error"}

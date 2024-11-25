@@ -80,3 +80,25 @@ def get_rez_for_test(test_id: int):
     c = con.cursor()
     ans = c.execute(f"SELECT id_user, rez FROM Results WHERE id_test = '{test_id}'").fetchall()
     return ans
+
+
+def get_users():
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    ans = c.execute("SELECT id, username FROM Users").fetchall()
+    return ans
+
+
+def delete_user(user_id: int):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    c.execute(f"DELETE FROM Users WHERE id = '{user_id}'")
+    con.commit()
+    con.close()
+
+
+def get_user_rez(user_id: int):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    ans = c.execute(f"SELECT id_user, rez FROM Results WHERE id_user = '{user_id}'").fetchall()
+    return ans
