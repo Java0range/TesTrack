@@ -60,7 +60,7 @@ QPushButton:clicked {
     <widget class="QPushButton" name="pushButton_2">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>240</x>
        <y>0</y>
        <width>51</width>
        <height>61</height>
@@ -83,7 +83,7 @@ QPushButton:clicked {
     <widget class="QPushButton" name="pushButton_3">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>360</x>
        <y>0</y>
        <width>51</width>
        <height>61</height>
@@ -106,7 +106,7 @@ QPushButton:clicked {
     <widget class="QPushButton" name="pushButton_4">
      <property name="geometry">
       <rect>
-       <x>210</x>
+       <x>180</x>
        <y>0</y>
        <width>51</width>
        <height>61</height>
@@ -123,6 +123,29 @@ QPushButton:clicked {
       <size>
        <width>38</width>
        <height>38</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>0</y>
+       <width>51</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>../src/del.png</normaloff>../src/del.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>40</width>
+       <height>40</height>
       </size>
      </property>
     </widget>

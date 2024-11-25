@@ -1,6 +1,5 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QPushButton, QFileDialog
-from PyQt6 import QtCore, QtGui, QtWidgets
-from PyQt6.QtCore import pyqtSignal
+from PyQt6 import QtGui, QtWidgets
 from ConnectWindow import Ui_ConnectServer
 from TestList import Ui_TestList
 from TestWindow import Ui_TestWindow
@@ -11,6 +10,7 @@ from AdminTestList import Ui_AdminTestList
 from AdminCreateTest1 import Ui_create_test_1
 from AdminCreateTest2 import Ui_create_test_2
 from AdminTestsList import Ui_AdminTestsList
+from AdminUsersList import Ui_AdminUsersList
 from PyQt6.QtWidgets import QMessageBox
 import sys
 import requests
@@ -256,10 +256,16 @@ class AdminPanel(QDialog, Ui_AdminPanel):
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         self.pushButton_2.clicked.connect(self.tests_button)
+        self.pushButton.clicked.connect(self.users_button)
 
     def tests_button(self):
         self.tests_window = AdminTestsList()
         self.tests_window.show()
+        self.close()
+
+    def users_button(self):
+        self.users_window = AdminUsersList()
+        self.users_window.show()
         self.close()
 
 
@@ -432,6 +438,13 @@ class AdminTestList(QDialog, Ui_AdminTestList):
             self.tableWidget.insertRow(numRows)
             self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
             self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(" ".join(i[1].split("%%%"))))
+
+
+class AdminUsersList(QDialog, Ui_AdminUsersList):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
         
 
 if __name__ == '__main__':
