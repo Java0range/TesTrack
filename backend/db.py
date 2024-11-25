@@ -63,3 +63,13 @@ def create_rez(id_test: int, id_user: int, rez: list):
     c.execute(f"INSERT INTO Results(id_test, id_user, rez) VALUES('{id_test}', '{id_user}', '{'%%%'.join(rez)}')")
     con.commit()
     con.close()
+
+
+def delete_test(id_test: int):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    c.execute(f"DELETE FROM Tests WHERE id = '{id_test}'")
+    c.execute(f"DELETE FROM Vopros WHERE id_test = '{id_test}'")
+    c.execute(f"DELETE FROM Results WHERE id_test = '{id_test}'")
+    con.commit()
+    con.close()

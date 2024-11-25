@@ -259,6 +259,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_4.clicked.connect(self.reload)
         self.pushButton_2.clicked.connect(self.create_test)
+        self.pushButton_5.clicked.connect(self.delete_test)
         try:
             link = f"{user.link}/tests/tests/"
             responce = requests.get(link).json()["msg"]
@@ -294,6 +295,22 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
     def create_test(self):
         self.create_test_window = CreateTest1()
         self.create_test_window.show()
+
+    def delete_test(self):
+        try:
+            row = self.tableWidget.currentRow()
+            test_id = int(self.tableWidget.item(row, 0).text())
+            link = f"{user.link}/admin/deletetest/"
+            data = {
+                "test_id": test_id
+            }
+            requests.delete(link, json=data)
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.exec()
 
 
 class CreateTest1(QDialog, Ui_create_test_1):

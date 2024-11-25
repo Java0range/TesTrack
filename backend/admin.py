@@ -9,6 +9,10 @@ class CreateTest(BaseModel):
     otv: list
 
 
+class DeleteTest(BaseModel):
+    test_id: int
+
+
 admin = APIRouter(prefix="/admin", tags=["admin"])
 
 
@@ -20,3 +24,12 @@ async def create_test(inp: CreateTest):
         return "error"
     except Exception:
         return "error"
+
+
+@admin.delete("/deletetest/")
+async def delete_test(inp: DeleteTest):
+    try:
+        db.delete_test(inp.test_id)
+        return {"msg": "true"}
+    except Exception:
+        return {"msg": "error"}
