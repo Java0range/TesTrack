@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 
 def create_user(username: str, password: str, admin=False):
@@ -66,6 +67,7 @@ def create_rez(id_test: int, id_user: int, rez: list):
 
 
 def delete_test(id_test: int):
+    ans = get_test(id_test)[0]
     con = sqlite3.connect("database.db")
     c = con.cursor()
     c.execute(f"DELETE FROM Tests WHERE id = '{id_test}'")
@@ -73,6 +75,8 @@ def delete_test(id_test: int):
     c.execute(f"DELETE FROM Results WHERE id_test = '{id_test}'")
     con.commit()
     con.close()
+    for i in ans:
+        os.remove(f"./img/{i[0]}")
 
 
 def get_rez_for_test(test_id: int):
