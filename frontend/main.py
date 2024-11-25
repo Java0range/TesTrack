@@ -11,8 +11,11 @@ from AdminCreateTest1 import Ui_create_test_1
 from AdminCreateTest2 import Ui_create_test_2
 from AdminTestsList import Ui_AdminTestsList
 from AdminUsersList import Ui_AdminUsersList
+from AdminUserList import Ui_AdminUserList
+from CreateUser import Ui_CreateUser
 from PyQt6.QtWidgets import QMessageBox
 import sys
+import os
 import requests
 
 
@@ -52,6 +55,8 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
         self.pushButton.clicked.connect(self.auth)
         self.actionAdmin_Panel.triggered.connect(lambda: self.action_clicked(self.actionAdmin_Panel.text()))
         self.actionServer_Settings.triggered.connect(lambda: self.action_clicked(self.actionServer_Settings.text()))
+        if not os.path.exists('./src/temp'):
+            os.mkdir("./src/temp")
 
     def auth(self):
         try:
@@ -445,6 +450,129 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
         super().__init__()
         self.setupUi(self)
         self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.tableWidget.setColumnWidth(0, 100)
+        self.tableWidget.setColumnWidth(1, 500)
+        self.pushButton_2.clicked.connect(self.create_user)
+        self.pushButton_4.clicked.connect(self.reload)
+        self.pushButton_5.clicked.connect(self.delete_user)
+        self.pushButton_3.clicked.connect(self.open_user)
+        try:
+            link = f"{user.link}/users/users/"
+            resp = requests.get(link).json()["msg"]
+            for i in resp:
+                numRows = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(numRows)
+                self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+                self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(i[1]))
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
+    def create_user(self):
+        self.user_create_window = CreateUser()
+        self.user_create_window.show()
+
+    def reload(self):
+        self.tableWidget.setRowCount(0)
+        try:
+            link = f"{user.link}/users/users/"
+            resp = requests.get(link).json()["msg"]
+            for i in resp:
+                numRows = self.tableWidget.rowCount()
+                self.tableWidget.insertRow(numRows)
+                self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+                self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(i[1]))
+        except:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
+    def delete_user(self):
+        try:
+            row = self.tableWidget.currentRow()
+            user_id = int(self.tableWidget.item(row, 0).text())
+            link = f"{user.link}/admin/deleteuser/"
+            data = {
+                "user_id": user_id
+            }
+            requests.delete(link, json=data)
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
+    def open_user(self):
+        try:
+            row = self.tableWidget.currentRow()
+            user_id = int(self.tableWidget.item(row, 0).text())
+            link = f"{user.link}/users/userrez/"
+            data = {
+                "user_id": user_id
+            }
+            ans = requests.post(link, json=data).json()["msg"]
+            if ans != "error":
+                self.admin_user_list = AdminUserList(ans)
+                self.admin_user_list.show()
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
+
+class CreateUser(QDialog, Ui_CreateUser):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.login_button.clicked.connect(self.create_user)
+
+    def create_user(self):
+        try:
+            username = self.server_inp.text()
+            password = self.key_inp.text()
+            admin = self.checkBox.isChecked()
+            link = f"{user.link}/users/useradd/"
+            data = {
+                "username": username,
+                "password": password,
+                "admin": admin
+            }
+            requests.post(link, json=data)
+            self.close()
+        except:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.exec()
+
+
+class AdminUserList(QDialog, Ui_AdminUserList):
+    def __init__(self, lst: list):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.tableWidget.setColumnWidth(0, 100)
+        self.tableWidget.setColumnWidth(1, 500)
+        for i in lst:
+            numRows = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(numRows)
+            self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
+            self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(" ".join(i[1].split("%%%"))))
         
 
 if __name__ == '__main__':

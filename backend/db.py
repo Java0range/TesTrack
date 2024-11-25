@@ -93,6 +93,7 @@ def delete_user(user_id: int):
     con = sqlite3.connect("database.db")
     c = con.cursor()
     c.execute(f"DELETE FROM Users WHERE id = '{user_id}'")
+    c.execute(f"DELETE FROM Results WHERE id_user = '{user_id}'")
     con.commit()
     con.close()
 
