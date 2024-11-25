@@ -12,10 +12,12 @@ from AdminCreateTest2 import Ui_create_test_2
 from AdminTestsList import Ui_AdminTestsList
 from AdminUsersList import Ui_AdminUsersList
 from AdminUserList import Ui_AdminUserList
+from LickSave import Ui_LinkSave
 from CreateUser import Ui_CreateUser
 from PyQt6.QtWidgets import QMessageBox
 import sys
 import os
+import shutil
 import requests
 
 
@@ -58,7 +60,7 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
         if not os.path.exists('./src/temp'):
             os.mkdir("./src/temp")
         else:
-            os.remove("./src/temp")
+            shutil.rmtree("./src/temp")
             os.mkdir("./src/temp")
 
     def auth(self):
@@ -98,6 +100,9 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
             case "Admin Panel":
                 self.admin_auth = AuthAdmin()
                 self.admin_auth.show()
+            case "Server Settings":
+                self.settings = LinkSave()
+                self.settings.show()
 
 
 class TestList(QDialog, Ui_TestList):
@@ -576,6 +581,18 @@ class AdminUserList(QDialog, Ui_AdminUserList):
             self.tableWidget.insertRow(numRows)
             self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(str(i[0])))
             self.tableWidget.setItem(numRows, 1, QtWidgets.QTableWidgetItem(" ".join(i[1].split("%%%"))))
+
+
+class LinkSave(QDialog, Ui_LinkSave):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.server_inp.setText(user.link)
+        self.login_button.clicked.connect(self.save_link)
+
+    def save_link(self):
+        user.link = self.server_inp.text()
         
 
 if __name__ == '__main__':
