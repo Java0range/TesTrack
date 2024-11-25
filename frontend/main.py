@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QPushButton
+from PyQt6.QtWidgets import QApplication, QMainWindow, QDialog, QPushButton, QFileDialog
 from PyQt6 import QtCore, QtGui, QtWidgets
 from PyQt6.QtCore import pyqtSignal
 from ConnectWindow import Ui_ConnectServer
@@ -36,6 +36,10 @@ class InfoTest:
     def __init__(self):
         self.count_vopros = 0
         self.test_name = ""
+        self.img_url = {}
+
+    def get_list(self):
+        return self.img_url.values()
 
 
 
@@ -312,11 +316,51 @@ class CreateTest2(QDialog, Ui_create_test_2):
         self.setupUi(self)
         self.tableWidget.setColumnWidth(0, 180)
         self.tableWidget.setColumnWidth(1, 180)
-        for i in range(int(infotest.count_vopros) - 1):
+        self.pushButton.clicked.connect(self.create_test)
+        for i in range(int(infotest.count_vopros)):
             numRows = self.tableWidget.rowCount()
             self.tableWidget.insertRow(numRows)
+            button = QPushButton(f"Open_{i}")
+            self.tableWidget.setCellWidget(i, 0, button)
+            button.clicked.connect(self.open_img)
             self.tableWidget.setItem(numRows, 0, QtWidgets.QTableWidgetItem(i))
+            self.tableWidget.setRowHeight(i, 40)
+        self.tableWidget.setRowCount(int(infotest.count_vopros))
 
+    def open_img(self):
+        key = self.sender().text().split("_")[1]
+        file_name = QFileDialog.getOpenFileName(self, 'Выбрать картинку', '')[0]
+        infotest.img_url[key] = file_name
+
+    def create_test(self):
+        try:
+            otvets = []
+            for j in range(int(infotest.count_vopros)):
+                otvets.append(self.tableWidget.item(j, 1).text())
+            img_lst = []
+            for i in infotest.img_url.values():
+                link = f"{user.link}/files/upload"
+
+                files = {
+                    "upload_file": open(i, "rb")
+                }
+                resp = requests.post(link, files=files).json()["msg"]
+                img_lst.append(resp)
+            link = f"{user.link}/admin/createtest/"
+            data = {
+                "name": infotest.test_name,
+                "imgUrls": img_lst,
+                "otv": otvets
+            }
+            requests.post(link, json=data)
+            self.close()
+        except Exception:
+            msg_box = QMessageBox()
+            msg_box.setIcon(QMessageBox.Icon.Critical)
+            msg_box.setText("Ошибка")
+            msg_box.setWindowTitle("Ошибка")
+            msg_box.exec()
+        
 
 if __name__ == '__main__':
     user = User()
