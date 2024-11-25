@@ -40,3 +40,12 @@ async def save_rez(inp: CreateRez):
         return {"msg": "true"}
     except Exception:
         return {"msg": "error"}
+
+
+@tests.post("/reztest/")
+async def get_rez_from_test(inp: Test):
+    try:
+        ans = db.get_rez_for_test(inp.test_id)
+        return {"msg": ans}
+    except Exception:
+        return {"msg": "error"}

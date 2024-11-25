@@ -73,3 +73,10 @@ def delete_test(id_test: int):
     c.execute(f"DELETE FROM Results WHERE id_test = '{id_test}'")
     con.commit()
     con.close()
+
+
+def get_rez_for_test(test_id: int):
+    con = sqlite3.connect("database.db")
+    c = con.cursor()
+    ans = c.execute(f"SELECT id_user, rez FROM Results WHERE id_test = '{test_id}'").fetchall()
+    return ans

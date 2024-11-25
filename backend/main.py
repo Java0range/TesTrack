@@ -1,6 +1,5 @@
 import uvicorn
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from user import user
 from tests import tests
 from admin import admin
