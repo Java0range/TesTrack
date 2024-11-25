@@ -57,6 +57,9 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
         self.actionServer_Settings.triggered.connect(lambda: self.action_clicked(self.actionServer_Settings.text()))
         if not os.path.exists('./src/temp'):
             os.mkdir("./src/temp")
+        else:
+            os.remove("./src/temp")
+            os.mkdir("./src/temp")
 
     def auth(self):
         try:
