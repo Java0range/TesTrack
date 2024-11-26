@@ -53,7 +53,7 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.pushButton.clicked.connect(self.auth)
         self.actionAdmin_Panel.triggered.connect(lambda: self.action_clicked(self.actionAdmin_Panel.text()))
         self.actionServer_Settings.triggered.connect(lambda: self.action_clicked(self.actionServer_Settings.text()))
@@ -92,7 +92,7 @@ class MainWindow(QMainWindow, Ui_ConnectServer):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def action_clicked(self, event):
@@ -110,7 +110,7 @@ class TestList(QDialog, Ui_TestList):
         super().__init__()
         self.main = main
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_2.clicked.connect(self.test_clicked)
@@ -127,7 +127,7 @@ class TestList(QDialog, Ui_TestList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def test_clicked(self):
@@ -161,7 +161,7 @@ class TestList(QDialog, Ui_TestList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def save_img(self, imgurl):
@@ -184,7 +184,7 @@ class TestWindow(QDialog, Ui_TestWindow):
     def __init__(self, imgurl):
         super().__init__()
         self.setupUi(self, imgurl)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.save_Button.clicked.connect(self.close)
 
     def closeEvent(self, event):
@@ -197,7 +197,7 @@ class RezWindow(QDialog, Ui_Rez_Window):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(1, 275)
         self.tableWidget.setColumnWidth(2, 275)
 
@@ -228,7 +228,7 @@ class AuthAdmin(QDialog, Ui_AuthWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.login_button.clicked.connect(self.auth)
 
     def auth(self):
@@ -252,14 +252,14 @@ class AuthAdmin(QDialog, Ui_AuthWindow):
                     msg_box.setIcon(QMessageBox.Icon.Critical)
                     msg_box.setText("Ошибка")
                     msg_box.setWindowTitle("Ошибка")
-                    msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+                    msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
                     msg_box.exec()
         except Exception:
             msg_box = QMessageBox()
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
 
@@ -267,7 +267,7 @@ class AdminPanel(QDialog, Ui_AdminPanel):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.pushButton_2.clicked.connect(self.tests_button)
         self.pushButton.clicked.connect(self.users_button)
 
@@ -286,7 +286,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_4.clicked.connect(self.reload)
@@ -306,7 +306,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def reload(self):
@@ -324,7 +324,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def create_test(self):
@@ -345,7 +345,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def open_test(self):
@@ -365,7 +365,7 @@ class AdminTestsList(QDialog, Ui_AdminTestsList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
 
@@ -374,7 +374,7 @@ class CreateTest1(QDialog, Ui_create_test_1):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.pushButton.clicked.connect(self.next)
 
     def next(self):
@@ -389,7 +389,7 @@ class CreateTest2(QDialog, Ui_create_test_2):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 180)
         self.tableWidget.setColumnWidth(1, 180)
         self.pushButton.clicked.connect(self.create_test)
@@ -435,7 +435,7 @@ class CreateTest2(QDialog, Ui_create_test_2):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
 
@@ -443,7 +443,7 @@ class AdminTestList(QDialog, Ui_AdminTestList):
     def __init__(self, lst: list):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         for i in lst:
@@ -457,7 +457,7 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         self.pushButton_2.clicked.connect(self.create_user)
@@ -477,7 +477,7 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def create_user(self):
@@ -499,7 +499,7 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def delete_user(self):
@@ -516,7 +516,7 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
     def open_user(self):
@@ -536,7 +536,7 @@ class AdminUsersList(QDialog, Ui_AdminUsersList):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
 
@@ -544,7 +544,7 @@ class CreateUser(QDialog, Ui_CreateUser):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.login_button.clicked.connect(self.create_user)
 
     def create_user(self):
@@ -565,7 +565,7 @@ class CreateUser(QDialog, Ui_CreateUser):
             msg_box.setIcon(QMessageBox.Icon.Critical)
             msg_box.setText("Ошибка")
             msg_box.setWindowTitle("Ошибка")
-            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+            msg_box.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
             msg_box.exec()
 
 
@@ -573,7 +573,7 @@ class AdminUserList(QDialog, Ui_AdminUserList):
     def __init__(self, lst: list):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.tableWidget.setColumnWidth(0, 100)
         self.tableWidget.setColumnWidth(1, 500)
         for i in lst:
@@ -587,7 +587,7 @@ class LinkSave(QDialog, Ui_LinkSave):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-        self.setWindowIcon(QtGui.QIcon("./src/icon.png"))
+        self.setWindowIcon(QtGui.QIcon("./src/icon.ico"))
         self.server_inp.setText(user.link)
         self.login_button.clicked.connect(self.save_link)
 
