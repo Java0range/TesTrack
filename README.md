@@ -70,5 +70,5 @@ TesTrack - приложения для удобного проведения т�
 
 
 **Запуск:**
-+ Backend: `cd backend`, `python3 main.py`
++ Backend: `cd backend`, `python3 main.py` или `cd backend`, `uvicorn main:app --host 0.0.0.0 --port 8000`
 + Fronted: `cd frontend`, `python3 main.py` или `cd frontend`, `cd build`, `TesTrack.exe`
